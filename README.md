@@ -28,13 +28,6 @@ to [make it SerDe friendly][prost_serde] and eventually become a hub or "Rosetta
 }
 ```
 
-## Possible immediate next steps
-
-1. Take the hint from [prost_serde]'s FAQ and iterate so that we have straightforward SerDe for BED:
-> (...)But it is possible to place serde derive tags onto the generated types, so the same structure can support both prost and Serde.
-2. Experiment with the rest of the HTS formats.
-3. Benchmark.
-
 [prost_serde]: https://github.com/tokio-rs/prost#faq
 [noodles_serde]: https://github.com/zaeleus/noodles/issues/53
 [bioserde_twitter]: https://twitter.com/UMCCR/status/1511598211034624000
