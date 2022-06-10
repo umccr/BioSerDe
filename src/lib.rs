@@ -3,7 +3,13 @@ pub mod bed {
     include!(concat!(env!("OUT_DIR"), "/nucleus.genomics.v1.rs"));
 }
 
+// Generated from bed.proto
+pub mod fastq {
+    include!(concat!(env!("OUT_DIR"), "/nucleus.genomics.v1.rs"));
+}
+
 pub mod manually_inserted_bed_record_struct;
+pub mod manually_inserted_fastq_record_struct;
 
 pub fn create_simple_bedfile(_refname: &str) -> bed::BedRecord {
     let bed = bed::BedRecord::default();
