@@ -1,5 +1,5 @@
-use bioserde::create_manual_bedfile;
+use bioserde::manually_inserted_bed_record_struct::test_serde_bed;
 
 fn main() {
-    dbg!(create_manual_bedfile("chr1"));
+    dbg!(test_serde_bed());
 }

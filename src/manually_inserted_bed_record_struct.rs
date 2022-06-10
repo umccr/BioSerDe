@@ -1,6 +1,33 @@
+use serde::{Deserialize, Serialize};
+
+pub fn test_serde_bed() {
+    let bed = BedRecord {
+        reference_name: "".to_string(),
+        start: 0,
+        end: 0,
+        name: "".to_string(),
+        score: 0.0,
+        strand: 0, // NoStrand
+        thick_start: 0,
+        thick_end: 0,
+        item_rgb: "".to_string(),
+        block_count: 0,
+        block_sizes: "".to_string(),
+        block_starts: "".to_string(),
+    };
+
+    println!("{:?}", bed);
+
+    let serialized = serde_json::to_string(&bed).unwrap();
+    println!("serialized = {}", serialized);
+
+    let deserialized: BedRecord = serde_json::from_str(&serialized).unwrap();
+    println!("deserialized = {:?}", deserialized);
+}
+
 /// This message represents a single BED record. See
 /// <https://genome.ucsc.edu/FAQ/FAQformat.html#format1> for details.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Serialize, Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct BedRecord {
     /// The reference on which this variant occurs. Corresponds to "CHROM" in UCSC.
     #[prost(string, tag = "1")]
@@ -60,7 +87,7 @@ pub mod manually_inserted_bed_record_struct {
         ReverseStrand = 2,
     }
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Serialize, Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct BedHeader {
     /// The number of fields in the BED file.
     #[prost(int32, tag = "1")]
@@ -71,7 +98,7 @@ pub struct BedHeader {
 ///////////////////////////////////////////////////////////////////////////////
 
 /// Options for reading BED files.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Serialize, Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct BedReaderOptions {
     /// Optional. The number of fields to read from the BED file. If this is unset,
     /// or set to more fields than are present in the BED file, all fields are
@@ -81,5 +108,5 @@ pub struct BedReaderOptions {
 }
 /// Options for writing BED files.
 /// Currently this is a placeholder message.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Serialize, Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct BedWriterOptions {}
