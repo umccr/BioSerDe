@@ -1,7 +1,5 @@
-use bioserde::create_simple_bedfile;
-
-
+use bioserde::create_manual_bedfile;
 
 fn main() {
-        dbg!(create_simple_bedfile("chr1"));
+    dbg!(create_manual_bedfile("chr1"));
 }
