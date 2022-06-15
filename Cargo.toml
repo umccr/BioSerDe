@@ -7,6 +7,8 @@ edition = "2021"
 bytes = "1"
 prost = "0.10.1"
 prost-types = "0.10.1"
+thiserror = "1.0.31"
+
 noodles = { version = "0.24.0", features = ["bed", "fastq","core"] }
 
 [build-dependencies]

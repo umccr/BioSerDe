@@ -1,16 +1,17 @@
+use std::path::Path;
 use criterion::{black_box, Criterion, criterion_group, criterion_main};
 use noodles::bed;
 use noodles::core::Position;
 
-use bioserde::bioformat::BioSerde;
+use bioserde::bioformat::{BioFormat, FileError};
 
 
-fn bioformat_write(form: impl BioSerde) -> Result<(), Box<dyn std::error::Error>> {
-    form.write()
+fn bioformat_save(form: &impl BioFormat, path: &std::path::Path) -> Result<(), FileError> {
+    form.save(path)
 }
 
-fn bioformat_read_whole(form: impl BioSerde, filename: &str) -> Result<(), Box<dyn std::error::Error>> {
-    form.read_whole(filename)
+fn bioformat_load_whole(form: &impl BioFormat, path: &std::path::Path) -> Result<(), FileError> {
+    form.load_whole(path)
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
@@ -23,11 +24,13 @@ fn criterion_benchmark(c: &mut Criterion) {
         .set_end_position(Position::try_from(13).unwrap())
         .build().unwrap();
 
+    let example_data = Path::new("testdata/multi-reference.bam");
+
     //TODO: Utilize benchmark_with_input
 
-    c.bench_function("Bam Write Example", |b| b.iter(|| bioformat_write(black_box(record.clone()))));
+    c.bench_function("Bam Write Example", |b| b.iter(|| bioformat_save(black_box(&record), example_data)));
 
-    c.bench_function("Bam Read Example", |b| b.iter(|| bioformat_read_whole(black_box(record.clone()), "testdata/multi-reference.bam")));
+    c.bench_function("Bam Read Example", |b| b.iter(|| bioformat_load_whole(black_box(&record), example_data)));
 }
 
 criterion_group!(benches, criterion_benchmark);

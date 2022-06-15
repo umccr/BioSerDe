@@ -1,11 +1,27 @@
-// A Trait by which benchable forms should adhere
+use std::io;
+use thiserror;
 
-// TODO: Example of how to handle a format that doesn't impl some trait fn.
-// TODO: Such as only some formats having headers.
 
-pub trait BioSerde {
-    fn read_whole(&self, filename: &str) -> Result<(), Box<dyn std::error::Error>>;
-    fn read_header(&self) -> Result<(), Box<dyn std::error::Error>>;
+// A Trait by which files should adhere
 
-    fn write(&self) -> Result<(), Box<dyn std::error::Error>>;
+
+pub trait BioFormat {
+    fn load_whole(&self, path: &std::path::Path) -> Result<(), FileError>;
+    fn load_header(&self, path: &std::path::Path) -> Result<(), FileError>;
+
+    fn save(&self, path: &std::path::Path) -> Result<(), FileError>;
 }
+
+
+#[derive(thiserror::Error, Debug)]
+pub enum FileError {
+    #[error("Cannot open file!")]
+    FileOpen(#[source] io::Error),
+    #[error("Cannot save to file!")]
+    FileSave(#[source] io::Error),
+    #[error("Failed to parse record!")]
+    RecordRead(#[source] io::Error),
+    #[error("Failed to write! record!")]
+    RecordWrite(#[source] io::Error),
+}
+
