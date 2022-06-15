@@ -4,13 +4,13 @@ use std::io::Write;
 use noodles::bed;
 use noodles::fastq;
 
-use crate::bioformat::BioFormat;
+use crate::bioformat::BioSerde;
 
 
 //TODO: Dynamic Sizing over Record<Size>
 
 //impl<const N: u8> BioFormat for bed::record::Record<N>
-impl BioFormat for bed::record::Record<3> {
+impl BioSerde for bed::record::Record<3> {
     fn read_whole(&self, filename: &str) -> Result<(), Box<dyn std::error::Error>> {
 
         let mut reader = File::open(filename).map(BufReader::new).map(bed::Reader::new)?;
@@ -40,7 +40,7 @@ impl BioFormat for bed::record::Record<3> {
     }
 }
 
-impl BioFormat for fastq::Record {
+impl BioSerde for fastq::Record {
     //TODO: Think over this. If we're reading in new records, are we even leveraging the self record?
     fn read_whole(&self, filename: &str) -> Result<(), Box<dyn Error>> {
         let mut reader = File::open(filename).map(BufReader::new).map(bed::Reader::new)?;

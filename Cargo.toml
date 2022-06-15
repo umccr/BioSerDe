@@ -7,14 +7,13 @@ edition = "2021"
 bytes = "1"
 prost = "0.10.1"
 prost-types = "0.10.1"
+noodles = { version = "0.24.0", features = ["bed", "fastq","core"] }
 
 [build-dependencies]
 prost-build = "0.10.1"
 
 [dev-dependencies]
 criterion = "0.3.5"
-#Specifically For Bechmarking
-noodles = { version = "0.24.0", features = ["bed", "fastq","core"] }
 
 [[bench]]
 name = "example"

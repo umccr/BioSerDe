@@ -1,17 +1,15 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{black_box, Criterion, criterion_group, criterion_main};
 use noodles::bed;
 use noodles::core::Position;
-use crate::bioformat::BioFormat;
 
-mod bioformat;
-mod impls;
+use bioserde::bioformat::BioSerde;
 
 
-fn bioformat_write(form: impl BioFormat) -> Result<(), Box<dyn std::error::Error>> {
+fn bioformat_write(form: impl BioSerde) -> Result<(), Box<dyn std::error::Error>> {
     form.write()
 }
 
-fn bioformat_read_whole(form: impl BioFormat, filename: &str) -> Result<(), Box<dyn std::error::Error>> {
+fn bioformat_read_whole(form: impl BioSerde, filename: &str) -> Result<(), Box<dyn std::error::Error>> {
     form.read_whole(filename)
 }
 

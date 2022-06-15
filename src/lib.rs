@@ -1,3 +1,6 @@
+pub mod bioformat;
+mod impls;
+
 // Generated from bed.proto
 pub mod bed {
     include!(concat!(env!("OUT_DIR"), "/nucleus.genomics.v1.rs"));
