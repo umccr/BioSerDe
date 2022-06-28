@@ -4,18 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-noodles = { version = "0.24", features = ["core", "bed", "fasta", "fastq", "bgzf", "bam", "bcf", "cram", "csi", "sam", "tabix", "vcf"] }
-noodles-bam = { version = "0.19", features = ["async"] }
-noodles-bcf = { version = "0.13", features = ["async"] }
-noodles-cram = { version = "0.16", features = ["async"] }
-noodles-vcf = { version = "0.16", features = ["async"] }
-noodles-fasta = { version = "0.11", features = ["async"] }
-noodles-fastq = { version = "0.5", features = ["async"] }
-# noodles-gff = { version = "0.6" } # These do not support async (yet) :_(
-# noodles-gtf = { version = "0.3" }
-noodles-bed = { version = "0.3" }
+noodles = { version = "0.24", features = ["core", "bed"], path = "../noodles/noodles" }
+noodles-bed = { version = "0.3", path = "../noodles/noodles-bed" }
 
 async-trait = { version = "0.1" }
-arrow = { version = "16" }
+arrow = { version = "17" }
 serde = { version = "1" }
 thiserror = { version = "1" }
