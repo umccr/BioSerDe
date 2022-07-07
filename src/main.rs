@@ -17,7 +17,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{:?}", bed_records);
 
     let bed_record_serialization= bed::to_string(&bed_records)?;
-    println!("{:#?}", bed_record_serialization);
+    println!("{:?}", bed_record_serialization);
+
+    let test_1 = r#"{"chrom":"chr7","start":127471197,"end":127472363}"#;
+    let bed_record_deserialization_test_1: Record::<3> = bed::from_str(test_1).unwrap();
+    println!("{:?}", bed_record_deserialization_test_1);
+
+    // // Doesn't work yet
+    // // (Should it?)
+    // let test_2 = r#"[
+    //     {"chrom":"chr7","start":127471197,"end":127472363},
+    //     {"chrom":"chr7","start":127472364,"end":127473530},
+    //     {"chrom":"chr7","start":127473531,"end":127474697}
+    // ]"#;
+    // let bed_record_deserialization_test_2: Vec<Record::<3>> = bed::from_str(test_2).unwrap();
+    // println!("{:?}", bed_record_deserialization_test_2);
 
     // assert_eq!(reference, serialized);
 
