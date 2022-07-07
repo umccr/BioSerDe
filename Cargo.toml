@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-noodles = { version = "0.24", features = ["core", "bed"], git = "https://github.com/umccr/noodles.git", branch = "serde" }
-noodles-bed = { version = "0.3", git = "https://github.com/umccr/noodles.git", branch = "serde" }
+noodles = { version = "0.24", features = ["core", "bed"], git = "https://github.com/umccr/noodles.git", branch = "bed_serde" }
+noodles-bed = { version = "0.3", git = "https://github.com/umccr/noodles.git", branch = "bed_serde" }
 
 async-trait = { version = "0.1" }
 arrow = { version = "17" }
